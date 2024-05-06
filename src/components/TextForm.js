@@ -5,11 +5,13 @@ export default function TextForm(props) {
 		console.log("Uppercase was clicked");
 		let newText = text.toUpperCase();
 		setText(newText);
+		props.showAlert("Converted to uppercase", "success");
 	};
 	const handleLowerCaseClick = () => {
 		console.log("Lowercase was clicked");
 		let newText = text.toLowerCase();
 		setText(newText);
+		props.showAlert("Converted to lowercase", "success");
 	};
 	const handleinverseclick = () => {
 		console.log("inverse click is triggered");
@@ -67,7 +69,7 @@ export default function TextForm(props) {
 
 	return (
 		<>
-			<div className="container">
+			<div className="container" style={{ color: props.mode === "dark" ? "white" : "#042743" }}>
 				<h1>{props.heading}</h1>
 				<div className="mb-3">
 					{/* <label for="myBox">Comments</label> */}
@@ -75,6 +77,10 @@ export default function TextForm(props) {
 						className="form-control"
 						onChange={handleOnChange}
 						placeholder="Enter text here"
+						style={{
+							backgroundColor: props.mode === "dark" ? "grey" : "white",
+							color: props.mode === "dark" ? "white" : "#042743",
+						}}
 						value={text}
 						id="myBox"
 						rows="9"></textarea>
@@ -107,14 +113,14 @@ export default function TextForm(props) {
 					Remove Extra spaces
 				</button>
 			</div>
-			<div className="container my-3">
+			<div className="container my-3" style={{ color: props.mode === "dark" ? "white" : "#042743" }}>
 				<h1>Your text summary</h1>
 				<p>
 					{text.split(" ").length} words and {text.length} character
 				</p>
 				<p>Time to read paragraph is {Math.ceil(text.split(" ").length * 0.008)} minutes</p>
 				<h2>Preview</h2>
-				<p>{text}</p>
+				<p>{text.length > 0 ? text : "Please write something to review"}</p>
 			</div>
 		</>
 	);
