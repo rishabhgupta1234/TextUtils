@@ -6,7 +6,7 @@ import About from "./components/About";
 import { useState } from "react";
 import Alerts from "./components/Alerts";
 
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
 	const [mode, setMode] = useState("light");
@@ -29,17 +29,17 @@ function App() {
 			setModeText("Enable LightMode");
 			document.body.style.backgroundColor = "#042743";
 			showAlert("Dark mode has been enabled", "success");
-			document.title = "TextUtils - DarkMode";
-			setInterval(() => {
-				document.title = "TextUtils is Amazing";
-			}, 2000);
+			// document.title = "TextUtils - DarkMode";
+			// setInterval(() => {
+			// 	document.title = "TextUtils is Amazing";
+			// }, 2000);
 		} else {
 			setMode("light");
 			// setModeBtnText("dark");
 			setModeText("Enable DarkMode");
 			document.body.style.backgroundColor = "white";
 			showAlert("Light mode has been enabled", "success");
-			document.title = "TextUtils - LightMode";
+			// document.title = "TextUtils - LightMode";
 		}
 	};
 	return (
@@ -61,7 +61,7 @@ function App() {
 							path="/"
 							element={<TextForm heading="Enter the text to analyze" mode={mode} showAlert={showAlert} />}
 						/>
-						<Route exact path="/about" element={<About />} />
+						<Route exact path="/about" element={<About mode={mode} />} />
 					</Routes>
 				</div>
 			</Router>
